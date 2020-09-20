@@ -22,7 +22,7 @@ usersRouter.post('/', async (req, res) => {
 
     return res.json({ name, email, id });
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(err.statusCode).json({ error: err.message });
   }
 });
 
@@ -41,7 +41,7 @@ usersRouter.patch(
 
       return res.json({ id, name, email, avatar });
     } catch (err) {
-      return res.status(400).json({ error: err.message });
+      return res.status(err.statusCode).json({ error: err.message });
     }
   },
 );
