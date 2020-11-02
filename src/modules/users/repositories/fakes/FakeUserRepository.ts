@@ -30,7 +30,9 @@ export default class UsersRepository implements IUsersRepository {
       updated_at: new Date(),
     });
 
-    return this.save(user);
+    await this.save(user);
+
+    return user;
   }
 
   public async save(user: User): Promise<User> {
