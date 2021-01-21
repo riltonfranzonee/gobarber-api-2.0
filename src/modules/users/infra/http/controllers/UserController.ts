@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
+import { classToClass } from 'class-transformer';
 
 class UserController {
   async create(req: Request, res: Response): Promise<Response> {
@@ -9,9 +10,9 @@ class UserController {
 
     const createUser = container.resolve(CreateUserService);
 
-    const { id } = await createUser.execute({ name, email, password });
+    const user = await createUser.execute({ name, email, password });
 
-    return res.json({ name, email, id });
+    return res.json(classToClass(user));
   }
 }
 
