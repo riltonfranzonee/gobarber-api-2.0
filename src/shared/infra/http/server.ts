@@ -21,9 +21,10 @@ const app = express();
 app.use(errors());
 
 app.use(cors());
-app.use(rateLimiter);
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(rateLimiter);
+
 app.use(routes);
 
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
